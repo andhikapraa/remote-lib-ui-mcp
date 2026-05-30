@@ -1,0 +1,71 @@
+{
+  "manifest_version": "0.4",
+  "name": "remote-lib-ui",
+  "display_name": "UI Remote Library",
+  "version": "0.2.0",
+  "description": "Search University of Indonesia's library databases from Claude using your own SSO login.",
+  "long_description": "Search 25+ University of Indonesia subscribed databases (ScienceDirect, IEEE Xplore, JSTOR, Scopus, SpringerLink, and more) directly from Claude. Logs in with your own UI SSO credentials over the EZproxy gateway, runs filtered searches (with an OpenAlex metadata fallback for sites that resist scraping), and resolves full-text / PDF download links. Everything runs locally on your computer; your credentials never leave your machine.",
+  "author": { "name": "Andhika" },
+  "homepage": "https://github.com/andhikapraa/remote-lib-ui-mcp",
+  "documentation": "https://github.com/andhikapraa/remote-lib-ui-mcp#readme",
+  "support": "https://github.com/andhikapraa/remote-lib-ui-mcp/issues",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "keywords": ["library", "academic-search", "ezproxy", "openalex", "university-of-indonesia", "research"],
+  "server": {
+    "type": "uv",
+    "entry_point": "src/remote_lib_mcp/server.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": ["run", "--directory", "${__dirname}", "remote-lib-ui-mcp"],
+      "env": {
+        "REMOTE_LIB_USERNAME": "${user_config.username}",
+        "REMOTE_LIB_PASSWORD": "${user_config.password}",
+        "REMOTE_LIB_OPENALEX_API_KEY": "${user_config.openalex_api_key}",
+        "REMOTE_LIB_DISABLED": "${user_config.disabled}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "search", "description": "Search a database with optional year/author/open-access filters." },
+    { "name": "get_download_url", "description": "Resolve the PDF / full-text link for an article." },
+    { "name": "fetch_url", "description": "Read a page through the proxy as markdown/text." },
+    { "name": "get_proxy_url", "description": "Get an authenticated link to open in a browser." },
+    { "name": "list_resources", "description": "List all available databases." },
+    { "name": "set_resource_enabled", "description": "Switch a database on/off." },
+    { "name": "refresh_catalog", "description": "Refresh the database catalog." }
+  ],
+  "user_config": {
+    "username": {
+      "type": "string",
+      "title": "Library username",
+      "description": "Your UI SSO username (the NetID you log in with, not your email).",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "title": "Library password",
+      "description": "Your UI SSO password. Stored securely in your OS keychain; it never leaves your computer.",
+      "sensitive": true,
+      "required": true
+    },
+    "openalex_api_key": {
+      "type": "string",
+      "title": "OpenAlex API key (optional)",
+      "description": "Leave blank. Only needed for a higher metadata-search quota.",
+      "sensitive": true,
+      "required": false
+    },
+    "disabled": {
+      "type": "string",
+      "title": "Hidden databases (optional)",
+      "description": "Comma-separated database slugs to hide (e.g. heinonline,scival). Leave blank to keep all.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32"],
+    "runtimes": { "python": ">=3.10" }
+  }
+}

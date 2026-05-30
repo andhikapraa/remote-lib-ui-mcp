@@ -1,0 +1,13 @@
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.gstack
+.env
+*.session
+.cookies.json
+session.json
+docs
+tests

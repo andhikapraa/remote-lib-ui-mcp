@@ -1,0 +1,62 @@
+name: Release
+
+# Push a version tag (e.g. `git tag v0.2.0 && git push --tags`) to build the
+# Claude Desktop extension and publish a GitHub Release with it attached.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write # create the release + upload the .mcpb asset
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install Node (for the mcpb CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check tag matches manifest.json version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          manifest="$(jq -r .version manifest.json)"
+          echo "tag=$tag  manifest=$manifest"
+          if [ "$tag" != "$manifest" ]; then
+            echo "::error::Tag v$tag does not match manifest.json version $manifest. Bump manifest.json (and pyproject.toml) first."
+            exit 1
+          fi
+
+      - name: Lint + test gate
+        run: |
+          uv sync --dev
+          uv run ruff check src/remote_lib_mcp tests
+          uv run ruff format --check src/remote_lib_mcp tests
+          uv run pytest -q
+
+      - name: Validate manifest + build .mcpb
+        run: |
+          npx -y @anthropic-ai/mcpb@latest validate manifest.json
+          npx -y @anthropic-ai/mcpb@latest pack . remote-lib-ui.mcpb
+
+      - name: Publish GitHub Release with the .mcpb
+        uses: softprops/action-gh-release@v2
+        with:
+          files: remote-lib-ui.mcpb
+          generate_release_notes: true
+          body: |
+            ## Install (Claude Desktop)
+
+            1. Download **`remote-lib-ui.mcpb`** below.
+            2. Double-click it (or Claude → Settings → Extensions → Advanced → Install Extension…).
+            3. Enter your UI SSO **username** and **password**, then Install.
+
+            No Python or terminal needed. Your password is stored in your OS keychain.

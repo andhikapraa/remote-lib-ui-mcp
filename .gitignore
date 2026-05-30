@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtualenv / uv  (uv.lock IS committed — applications pin their lockfile)
+.venv/
+
+# Secrets and session state
+.env
+*.session
+.cookies.json
+session.json
+.remote-lib-session.json
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# Built extension bundle (produced by the release workflow, attached to Releases)
+*.mcpb
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# gstack
+.gstack/

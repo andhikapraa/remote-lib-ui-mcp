@@ -1,0 +1,24 @@
+# Files excluded from the .mcpb bundle
+.git/
+.github/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+tests/
+docs/
+.gstack/
+
+# Secrets / local state — must never ship in the bundle
+.env
+*.session
+.cookies.json
+session.json
+.remote-lib-session.json
+
+# Build artifacts
+*.mcpb
+dist/
+build/
