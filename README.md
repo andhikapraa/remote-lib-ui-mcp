@@ -33,9 +33,15 @@ It covers Computer Science, ML/AI, medicine, psychology and mental health, and m
 
 ---
 
-## 🚀 Quick start — Claude Desktop (recommended, no coding)
+## 🚀 Quick start — Claude Desktop (recommended)
 
-The easiest way. You need the free **[Claude Desktop](https://claude.ai/download)** app — **no Python, no terminal, no config files.**
+**No Python and no config-file editing needed** — but you do need two things: the free **[Claude Desktop](https://claude.ai/download)** app, and **[`uv`](https://docs.astral.sh/uv/)** installed once. Claude Desktop uses `uv` to run the server, and `uv` then downloads the right Python for you automatically.
+
+**Step 0 — install `uv` once:**
+- **macOS:** `brew install uv`  &nbsp;*(use Homebrew — the Claude Desktop app may not find `uv` installed other ways)*
+- **Windows (PowerShell):** `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+
+Then **restart Claude Desktop** so it picks up `uv`.
 
 1. **Install Claude Desktop** (macOS or Windows) and update it to the latest version.
 2. **Download `remote-lib-ui.mcpb`** from this project's [**Releases**](https://github.com/andhikapraa/remote-lib-ui-mcp/releases) page.
@@ -171,7 +177,7 @@ For the `.mcpb` install you set everything in the form. For manual/dev installs,
 - **"Login rejected"** → re-check your username (NetID, not email) and password in Settings → Extensions.
 - **Scopus / JSTOR / Emerald give odd results** → these use the OpenAlex scholarly index, not the database's own engine; results are real papers but not the native catalog.
 - **A search returns no rows but a link** → that database is "entry-only" (or JS-heavy); open the returned `proxied_search_url` in your browser.
-- **`spawn uv ENOENT` (manual install)** → put the absolute path to `uv` in the config.
+- **`spawn uv ENOENT`** → `uv` isn't on the PATH the app can see. Install it (Step 0), then **restart Claude Desktop**. On macOS install `uv` via **Homebrew** (the GUI app has a minimal PATH and often can't see other install methods). For the manual config, use the **absolute path** to `uv`.
 
 ---
 

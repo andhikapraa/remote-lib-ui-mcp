@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] — 2026-05-30
+
+### Fixed / Docs
+- **Honest prerequisites.** The Claude Desktop (`.mcpb`) path requires `uv` installed once
+  (Claude Desktop bundles Node, not Python/uv, and runs the server via the user's `uv`); `uv`
+  then provisions Python automatically. README and the extension's install description now say so,
+  with one-line `uv` install steps for macOS (Homebrew) and Windows, plus a `spawn uv ENOENT` note.
+
 ## [0.2.0] — 2026-05-30
 
 Production-hardening release.
