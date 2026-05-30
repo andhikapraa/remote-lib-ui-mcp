@@ -1,0 +1,28 @@
+manifest.json
+  s_3b18e0d7557876::t_a43841bcd0c699 5,7
+pyproject.toml
+  s_3b18e0d7557876::t_ff2987b2ed77ff 3
+CHANGELOG.md
+  s_3b18e0d7557876::t_a4453347092a36 7-14
+uv.lock
+  ai_agent 1101
+README.md
+  s_3b18e0d7557876::t_3c59472df4e61f 180
+  s_3b18e0d7557876::t_d6b161ece25c2a 36,38-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "50c798c797d61b7054d451acb532e0696c2d1370",
+  "prompts": {},
+  "sessions": {
+    "s_3b18e0d7557876": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ce03a66c-167d-446b-8162-33423ba8eb2c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Muhammad Andhika Prasetya <andhikapraa@gmail.com>"
+    }
+  }
+}
