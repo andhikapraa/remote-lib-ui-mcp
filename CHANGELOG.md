@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.2] — 2026-05-30
+
+### Docs
+- Use the official `uv` one-line installer for both macOS and Windows (no Homebrew),
+  in the README and the extension's install description.
+
 ## [0.2.1] — 2026-05-30
 
 ### Fixed / Docs

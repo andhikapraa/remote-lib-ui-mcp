@@ -1,6 +1,6 @@
 [project]
 name = "remote-lib-ui-mcp"
-version = "0.2.1"
+version = "0.2.2"
 description = "MCP server for UI's remote library (remote-lib.ui.ac.id) — CAS SSO login, EZproxy access, content fetch, and database search (native scrapers + OpenAlex metadata fallback), with a cloakbrowser stealth fallback for Cloudflare-walled resources."
 readme = "README.md"
 requires-python = ">=3.10"
